@@ -2,10 +2,9 @@ package com.hpe.ssa.mapper;
 
 import com.hpe.ssa.pojo.ShoeSizes;
 import com.hpe.ssa.pojo.SpcifyShoes;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
-@Service
+
 public interface SpcifyShoesMapper {
     //获取定制鞋子总数
     int selectSpcShoesNum();

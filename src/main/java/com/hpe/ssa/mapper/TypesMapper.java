@@ -1,10 +1,9 @@
 package com.hpe.ssa.mapper;
 
 import com.hpe.ssa.pojo.Types;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
-@Service
+
 public interface TypesMapper {
 
     //获取种类总数1

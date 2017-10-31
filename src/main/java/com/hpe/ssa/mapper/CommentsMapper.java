@@ -1,10 +1,9 @@
 package com.hpe.ssa.mapper;
 
 import com.hpe.ssa.pojo.Comments;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
-@Service
+
 public interface CommentsMapper {
     //查询客户评价列表
    List<Comments> selectShoesCommentList(int index);

@@ -52,11 +52,7 @@ public class ProductController {
         return String.valueOf(shoeService.selectShoesNum());
     }
 
-    @RequestMapping(value = "/update/shoe",method = RequestMethod.POST)
-    @ResponseBody
-    public ResultUtil updateShoeDetail(Shoes shoes){
-        return null;
-    }
+
 
     @RequestMapping("/shoeinput")
     public String showShoeAddPage(){
@@ -76,6 +72,16 @@ public class ProductController {
     @ResponseBody
     public ResultUtil chgBrandState(int delid,int del){
         if (shoeService.updateShoeState(delid,del)!=0){
+            return new ResultUtil("1","成功");
+        }else {
+            return new ResultUtil("0","失败");
+        }
+    }
+
+    @RequestMapping(value = "/update/shoe",method = RequestMethod.POST)
+    @ResponseBody
+    public ResultUtil updateShoeDetail(Shoes shoe){
+        if (shoeService.updateShoeInfo(shoe)!=0){
             return new ResultUtil("1","成功");
         }else {
             return new ResultUtil("0","失败");

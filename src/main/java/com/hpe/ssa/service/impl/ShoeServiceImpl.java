@@ -61,6 +61,11 @@ public class ShoeServiceImpl implements ShoeService {
     }
 
     @Override
+    public int updateShoeInfo(Shoes shoe) {
+        return shoesMapper.updateByPrimaryKeySelective(shoe);
+    }
+
+    @Override
     public int selectShoesNum() {
         return shoesMapper.selectShoesNum();
     }

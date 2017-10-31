@@ -109,6 +109,45 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 		</trim>
 	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.hpe.ssa.pojo.SpcifyShoes">
+		update spcify_shoes
+		<set >
+			<if test="sp_tid != null" >
+				sp_tid = #{sp_tid,jdbcType=INTEGER},
+			</if>
+			<if test="sp_bid != null" >
+				sp_bid = #{sp_bid,jdbcType=INTEGER},
+			</if>
+			<if test="spsseq != null" >
+				spsseq = #{spsseq,jdbcType=VARCHAR},
+			</if>
+			<if test="spsname != null" >
+				spsname = #{spsname,jdbcType=VARCHAR},
+			</if>
+			<if test="spsprices != null" >
+				spsprices = #{spsprices,jdbcType=FLOAT},
+			</if>
+			<if test="spscontent != null" >
+				spscontent = #{spscontent,jdbcType=VARCHAR},
+			</if>
+			<if test="spspartnum != null" >
+				spspartnum = #{spspartnum,jdbcType=INTEGER},
+			</if>
+			<if test="spspartinfo != null" >
+				spspartinfo = #{spspartinfo,jdbcType=VARCHAR},
+			</if>
+			<if test="spsgender != null" >
+				spsgender = #{spsgender,jdbcType=VARCHAR},
+			</if>
+			<if test="spscss != null" >
+				spscss = #{spscss,jdbcType=INTEGER},
+			</if>
+			<if test="spremarks != null" >
+				spremarks = #{spremarks,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where spsid = #{spsid,jdbcType=INTEGER}
+	</update>
 	<delete id="deleteSpcShoeById" parameterType="java.lang.Integer">
 		DELETE FROM spcify_shoes WHERE spsid=#{spsid}
 	</delete>

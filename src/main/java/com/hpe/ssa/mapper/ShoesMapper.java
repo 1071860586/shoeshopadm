@@ -19,5 +19,7 @@ public interface ShoesMapper {
     List<Sizes> selectShoeSizeById(int sid);
     //禁用以及撤销禁用
     int updateShoeState(Shoes shoe);
+    //修改类型
+    int updateByPrimaryKeySelective(Shoes shoe);
 
 }

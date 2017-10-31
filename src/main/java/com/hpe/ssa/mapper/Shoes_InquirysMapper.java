@@ -1,11 +1,10 @@
 package com.hpe.ssa.mapper;
 
 import com.hpe.ssa.pojo.Shoes_Inquirys;
-import org.springframework.stereotype.Service;
 
 
 import java.util.List;
-@Service
+
 public interface Shoes_InquirysMapper {
     //查询客户咨询列表
     List<Shoes_Inquirys> selectShoes_InquirysList(int index);
