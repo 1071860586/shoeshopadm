@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hpe.ssa.mapper.CommentsMapper" >
+    <sql id="Base_Column_List">
+        uname,sname,cid,c_uid,c_sid,sccomments,scscore,sctime,scoid,scremarks
+    </sql>
+    <resultMap id="ShoesComments" type="com.hpe.ssa.pojo.Comments">
+        <id property="cid" column="cid"/>
+        <result property="c_uid" column="c_uid"/>
+        <result property="c_sid" column="c_sid"/>
+        <result property="sccomments" column="sccomments"/>
+        <result property="scscore" column="scscore"/>
+        <result property="sctime" column="sctime"/>
+        <result property="scoid" column="scoid"/>
+        <result property="scremarks" column="scremarks"/>
+        <result property="uname" column="uname"/>
+        <result property="sname" column="sname"/>
+    </resultMap>
+    <select id="selectBySid" parameterType="java.lang.Integer" resultMap="ShoesComments" >
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM comments,users,shoes
+        WHERE sid=#{sid} AND c_uid=uid AND c_sid=sid
+    </select>
+    <select id="selectShoesCommentList" parameterType="java.lang.Integer" resultMap="ShoesComments" >
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM comments,users,shoes
+        WHERE c_uid=uid AND c_sid=sid
+        ORDER BY cid
+        LIMIT #{index},4
+    </select>
+    <select id="selectCommentsNum" resultType="java.lang.Integer">
+        SELECT COUNT(cid)
+        FROM comments
+    </select>
+    <delete id="deleteByCid">
+        DELETE
+        FROM comments
+        WHERE
+        <if test="_parameter != null">
+            cid=#{cid,jdbcType=INTEGER}
+        </if>
+    </delete>
+</mapper>

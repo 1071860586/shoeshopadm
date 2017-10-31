@@ -13,23 +13,13 @@ import com.hpe.ssa.pojo.Admins;
 public class AdminsServiceImpl implements AdminsService {
 	@Autowired
 	private AdminsMapper adminsMapper;
-
-	
-	public AdminsMapper getAdminsMapper() {
-		return adminsMapper;
-	}
-
-	public void setAdminsMapper(AdminsMapper adminsMapper) {
-		this.adminsMapper = adminsMapper;
-	}
-
 	@Override
 	public Admins login(Admins admins) {
 		Admins ad = adminsMapper.login(admins);
 		return ad;
 	}
 
-	@Override
+/*	@Override
 	public int addAdmins(Admins admins) {
 		return 0;
 	}
@@ -52,6 +42,6 @@ public class AdminsServiceImpl implements AdminsService {
 	@Override
 	public List<Admins> getAdminsList() {
 		return null;
-	}
+	}*/
 
 }
