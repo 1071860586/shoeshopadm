@@ -62,6 +62,8 @@ public class ShoeServiceImpl implements ShoeService {
 
     @Override
     public int updateShoeInfo(Shoes shoe) {
+        shoe.setStid(Integer.valueOf(shoe.getTname()));
+        shoe.setSbid(Integer.valueOf(shoe.getBname()));
         return shoesMapper.updateByPrimaryKeySelective(shoe);
     }
 

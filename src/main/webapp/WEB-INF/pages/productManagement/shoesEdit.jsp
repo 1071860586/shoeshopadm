@@ -96,46 +96,46 @@
                     <label class="col-sm-2 control-label">选择尺寸：</label>
                     <div class="col-sm-4">
                         <label class="checkbox">
-                            <input type="checkbox" name="sizeList" value="1">35.0 num
+                            <input type="checkbox" name="sizeChoose" value="1">35.0 num
                         </label>
                         <label class="checkbox">
-                            <input type="checkbox" name="sizeList" value="2">36.0 num
+                            <input type="checkbox" name="sizeChoose" value="2">36.0 num
                         </label>
                         <label class="checkbox">
-                            <input type="checkbox" name="sizeList" value="3">37.0 num
+                            <input type="checkbox" name="sizeChoose" value="3">37.0 num
                         </label>
                         <label class="checkbox">
-                            <input type="checkbox" name="sizeList" value="4">38.0 num
+                            <input type="checkbox" name="sizeChoose" value="4">38.0 num
                         </label>
                         <label class="checkbox">
-                            <input type="checkbox" name="sizeList" value="5">39.0 num
+                            <input type="checkbox" name="sizeChoose" value="5">39.0 num
                         </label>
                         <label class="checkbox">
-                            <input type="checkbox" name="sizeList" value="6">40.0 num
+                            <input type="checkbox" name="sizeChoose" value="6">40.0 num
                         </label>
                         <label class="checkbox">
-                            <input type="checkbox" name="sizeList" value="7">41.0 num
+                            <input type="checkbox" name="sizeChoose" value="7">41.0 num
                         </label>
                         <label class="checkbox">
-                            <input type="checkbox" name="sizeList" value="8">42.0 num
+                            <input type="checkbox" name="sizeChoose" value="8">42.0 num
                         </label>
                         <label class="checkbox">
-                            <input type="checkbox" name="sizeList" value="9">43.0 num
+                            <input type="checkbox" name="sizeChoose" value="9">43.0 num
                         </label>
                         <label class="checkbox">
-                            <input type="checkbox" name="sizeList" value="10">44.0 num
+                            <input type="checkbox" name="sizeChoose" value="10">44.0 num
                         </label>
                         <label class="checkbox">
-                            <input type="checkbox" name="sizeList" value="11">45.0 num
+                            <input type="checkbox" name="sizeChoose" value="11">45.0 num
                         </label>
                         <label class="checkbox">
-                            <input type="checkbox" name="sizeList" value="12">46.0 num
+                            <input type="checkbox" name="sizeChoose" value="12">46.0 num
                         </label>
                         <label class="checkbox">
-                            <input type="checkbox" name="sizeList" value="13">47.0 num
+                            <input type="checkbox" name="sizeChoose" value="13">47.0 num
                         </label>
                         <label class="checkbox">
-                            <input type="checkbox" name="sizeList" value="14">48.0 num
+                            <input type="checkbox" name="sizeChoose" value="14">48.0 num
                         </label>
                         <%--<label for="simage" class="col-sm-2 control-label">继续上传图片：</label>--%>
                         <%--<div class="col-sm-4">--%>
@@ -223,8 +223,8 @@
         $("input[value="+shoe.sgender+"]").attr("checked",'checked');
         $("input[name='sdelete'][value='shoe.sdelete']").attr("checked",true);
         $("input[value="+shoe.sdelete+"]").attr("checked",'checked');
-        var sizeList = $("input[name='sizeList']");
-        $.each(shoe.sizeList,function (index,item) {
+        var sizeList = $("input[name='sizeChoose']");
+        $.each(shoe.sizeList,function (index, item) {
             $.each(sizeList,function (inner_index,inner_item) {
                 if(item.sizeid==inner_item.value){
                     inner_item.checked=true;
