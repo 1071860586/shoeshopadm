@@ -2,6 +2,7 @@ package com.hpe.ssa.service.impl;
 
 import java.util.List;
 
+import com.hpe.ssa.pojo.Permission;
 import com.hpe.ssa.service.AdminsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,14 +15,6 @@ public class AdminsServiceImpl implements AdminsService {
 	@Autowired
 	private AdminsMapper adminsMapper;
 
-	
-	public AdminsMapper getAdminsMapper() {
-		return adminsMapper;
-	}
-
-	public void setAdminsMapper(AdminsMapper adminsMapper) {
-		this.adminsMapper = adminsMapper;
-	}
 
 	@Override
 	public Admins login(Admins admins) {
@@ -36,12 +29,12 @@ public class AdminsServiceImpl implements AdminsService {
 
 	@Override
 	public int updateAdmins(Admins admins) {
-		return 0;
+		return adminsMapper.updateAdmins(admins);
 	}
 
 	@Override
-	public int deleteAdmins(Admins admins) {
-		return 0;
+	public int deleteAdmins(int aid) {
+		return adminsMapper.deleteAdmins(aid);
 	}
 
 	@Override
@@ -51,7 +44,32 @@ public class AdminsServiceImpl implements AdminsService {
 
 	@Override
 	public List<Admins> getAdminsList() {
-		return null;
+		return adminsMapper.getAdminsList();
+	}
+
+	@Override
+	public int selectAdminsNum() {
+		return adminsMapper.selectAdminsNum();
+	}
+
+	@Override
+	public Admins selectAdminDetailById(int aid) {
+		return adminsMapper.selectAdminDetailById(aid);
+	}
+
+	@Override
+	public List<Admins> selectAdminsList(int index) {
+		return adminsMapper.selectAdminsList(index);
+	}
+
+	@Override
+	public List<Permission> selectPermissionList() {
+		return adminsMapper.selectPermissionList();
+	}
+
+	@Override
+	public int insertAdmin(Admins admin) {
+		return adminsMapper.insertAdmin(admin);
 	}
 
 }
