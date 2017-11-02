@@ -7,16 +7,26 @@ public class Admins {
 	private String apwd;
 	private int a_pcid;
 	private String aremarks;
+	private Permission permission;
 
 	public Admins() {
 	}
 
-	public Admins(int aid, String acount, String apwd, int a_pcid, String aremarks) {
+	public Admins(int aid, String acount, String apwd, int a_pcid, String aremarks, Permission permission) {
 		this.aid = aid;
 		this.acount = acount;
 		this.apwd = apwd;
 		this.a_pcid = a_pcid;
 		this.aremarks = aremarks;
+		this.permission = permission;
+	}
+
+	public Permission getPermission() {
+		return permission;
+	}
+
+	public void setPermission(Permission permission) {
+		this.permission = permission;
 	}
 
 	public int getAid() {
@@ -67,6 +77,7 @@ public class Admins {
 				", apwd='" + apwd + '\'' +
 				", a_pcid=" + a_pcid +
 				", aremarks='" + aremarks + '\'' +
+				", permission=" + permission +
 				'}';
 	}
 }

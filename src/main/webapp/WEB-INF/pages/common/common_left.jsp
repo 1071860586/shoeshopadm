@@ -3,8 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div class="sidebar-nav">
     <ul>
-   <c:forEach items="${percontentList }" var="percontent">
-   		<jsp:include page="${percontent.pcmenu }"></jsp:include> 
-   </c:forEach> 
-            </ul>
-    </div>
+        <c:forEach items="${percontentList }" var="percontent">
+            <jsp:include page="${percontent.pcmenu }"></jsp:include>
+        </c:forEach>
+    </ul>
+</div>
