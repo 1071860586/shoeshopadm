@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -11,15 +12,14 @@
 	<jsp:include page="../common/common_head.jsp" flush="false"/>
 	<jsp:include page="../common/common_left.jsp" flush="false"/>
 	<div class="content">
-		<div class="header">
-            
-            <h1 class="page-title">编辑用户信息</h1>
-                    <ul class="breadcrumb">
-            <li><a href="users.action">用户管理</a> </li>
-            <li class="active">编辑用户</li>
-        </ul>
+            <div class="header">
 
-        </div>
+                <h1 class="page-title">编辑用户信息</h1>
+                <ul class="breadcrumb">
+                    <li><a href="users.action">用户管理</a> </li>
+                    <li class="active">编辑用户</li>
+                </ul>
+            </div>
         <div class="main-content">
             
 
@@ -40,11 +40,11 @@
         </div>
         <div class="form-group">
         <label>性别</label>
-        	<c:if test="${users.ugender=='男' }">
+        	<c:if test="${users.ugender=='男'}">
         		<input type="radio" name="ugender"  value="男" checked="checked">男
-        		<input type="radio" name="ugender" value="女" >女
+        		<input type="radio" name="ugender"  value="女" >女
         	</c:if>
-        	<c:if test="${users.ugender=='女' }">
+        	<c:if test="${users.ugender=='女'}">
         		<input type="radio" name="ugender"  value="男" >男
         		<input type="radio" name="ugender"  value="女" checked="checked">女
         	</c:if>
@@ -68,8 +68,11 @@
         </div>
 
 	      <input class="btn btn-primary" type="submit" value="提交"/>
-	      <a class="btn btn-default" href="users.action"><i class="fa fa-undo"></i> 取消</a>
+	      <a class="btn btn-default" href="go.action"><i class="fa fa-undo"></i> 取消</a>
         </form>
+          <h5><c:if test="${! empty update}">
+              <c:out value="${update}"></c:out>
+          </c:if></h5>
       </div>
 
     </div>
