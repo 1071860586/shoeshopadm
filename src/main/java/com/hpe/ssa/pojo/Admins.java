@@ -2,17 +2,17 @@ package com.hpe.ssa.pojo;
 
 public class Admins {
 
-	private int aid;
+	private Integer aid;
 	private String acount;
 	private String apwd;
-	private int a_pcid;
+	private Integer a_pcid;
 	private String aremarks;
 	private Permission permission;
 
 	public Admins() {
 	}
 
-	public Admins(int aid, String acount, String apwd, int a_pcid, String aremarks, Permission permission) {
+	public Admins(Integer aid, String acount, String apwd, Integer a_pcid, String aremarks, Permission permission) {
 		this.aid = aid;
 		this.acount = acount;
 		this.apwd = apwd;
@@ -21,19 +21,11 @@ public class Admins {
 		this.permission = permission;
 	}
 
-	public Permission getPermission() {
-		return permission;
-	}
-
-	public void setPermission(Permission permission) {
-		this.permission = permission;
-	}
-
-	public int getAid() {
+	public Integer getAid() {
 		return aid;
 	}
 
-	public void setAid(int aid) {
+	public void setAid(Integer aid) {
 		this.aid = aid;
 	}
 
@@ -53,11 +45,11 @@ public class Admins {
 		this.apwd = apwd;
 	}
 
-	public int getA_pcid() {
+	public Integer getA_pcid() {
 		return a_pcid;
 	}
 
-	public void setA_pcid(int a_pcid) {
+	public void setA_pcid(Integer a_pcid) {
 		this.a_pcid = a_pcid;
 	}
 
@@ -67,6 +59,14 @@ public class Admins {
 
 	public void setAremarks(String aremarks) {
 		this.aremarks = aremarks;
+	}
+
+	public Permission getPermission() {
+		return permission;
+	}
+
+	public void setPermission(Permission permission) {
+		this.permission = permission;
 	}
 
 	@Override

@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM admins
 	</select>
 	<select id="selectAdminDetailById" parameterType="java.lang.Integer" resultMap="adminPermissionMap">
-		select aid,acount,apwd,pername
+		select aid,acount,apwd,pername,perid
 		from admins,permission
 		where admins.a_pcid=permission.perid and aid=#{aid}
 	</select>
@@ -53,7 +53,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateAdmins" parameterType="com.hpe.ssa.pojo.Admins">
 		update admins
 		set
-		acount=#{acount},apwd=#{apwd},a_pcid=#{permission.perid},aremarks=#{aremarksaremarks}
+		acount=#{acount},apwd=#{apwd},a_pcid=#{a_pcid},aremarks=#{aremarks}
 		where aid=#{aid}
 	</update>
 </mapper>

@@ -21,11 +21,10 @@
     <div class="main-content">
         <div class="row">
             <form class="form-horizontal col-sm-offset-2" id="editadmininfo" method="post" >
-                <input type="text"  name="aid" hidden>
                 <div class="form-group">
-                    <label for="snum" class="col-sm-2 control-label">管理员编号：</label>
+                    <label for="aid" class="col-sm-2 control-label">管理员编号：</label>
                     <div class="col-sm-4">
-                        <span id="identifier"></span>
+                        <input type="text" class="form-control" id="aid" name="aid" readonly>
                     </div>
                     <label for="snum" class="col-sm-2 control-label">管理员帐号：</label>
                     <div class="col-sm-4">
@@ -35,13 +34,13 @@
                     <div class="col-sm-4">
                         <input type="password" class="form-control" id="addpwd1" name="apwd">
                     </div>
-                    <label for="remarks" class="col-sm-2 control-label">备注：</label>
+                    <label for="aremarks" class="col-sm-2 control-label">备注：</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" id="remarks" name="aremarks" >
+                        <input type="text" class="form-control" id="aremarks" name="aremarks" >
                     </div>
-                    <label for="pername" class="col-sm-2 control-label">管理员权限：</label>
+                    <label for="a_pcid" class="col-sm-2 control-label">管理员权限：</label>
                     <div class="col-sm-4">
-                        <select class="form-control" id="pername" name="permission.perid">
+                        <select class="form-control" id="a_pcid" name="a_pcid">
 
                         </select>
                     </div>
@@ -88,15 +87,15 @@
     });
     function setAdminDetail() {
         var admin = ${requestScope.admin};
-        $("#identifier").html(admin.aid);
+        $("input[name='aid']").val(admin.aid);
         $("input[name='acount']").val(admin.acount);
         $("input[name='apwd']").val(admin.apwd);
-        $("input[name='remarks']").val(admin.aremarks);
-        $("select[name='pername']").append("<option value=\'"+admin.permission.perid+"\' selected>"+admin.permission.pername+"</option>");
+        $("input[name='aremarks']").val(admin.aremarks);
+        $("select[name='a_pcid']").append("<option value=\'"+admin.permission.perid+"\' selected>"+admin.permission.pername+"</option>");
     }
 
     function editadmininfo() {
-
+        alert($("#editadmininfo").serialize());
         $.ajax({
             url : "update/admin",
             type : "POST",

@@ -108,8 +108,12 @@ public class AdminsController {
 	}
 	@RequestMapping(value = "/update/admin",method = RequestMethod.POST)
 	@ResponseBody
-	public int updateAdminDetail(Admins admin){
-		return adminsService.updateAdmins(admin);
+	public ResultUtil updateAdminDetail(Admins admin){
+		if (adminsService.updateAdmins(admin) !=0){
+			return new ResultUtil("1","成功");
+		}else {
+			return new ResultUtil("0","失败");
+		}
 	}
 }
 
