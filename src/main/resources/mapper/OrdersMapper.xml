@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hpe.ssa.mapper.OrdersMapper">
+	<!--普通订单 -->
+	<sql id="Base_Column_List">
+		o.oid id,
+		u.uaccount,
+		CONCAT(
+		r.recprovince,
+		r.reccity,
+		r.recdistrict,
+		r.recstreet
+		) adress,
+		o.ostate,
+		DATE_FORMAT(o.ordertime,'%Y-%m-%d') ordertime,
+		o.onum
+	</sql>
+	<!-- 定制订单 -->
+	<sql id="spcifyOrder">
+		SELECT
+		sr.sprid,
+		ss.spsname,
+		(
+		SELECT
+			onum
+		FROM
+			orders
+		WHERE
+			sp_oid = oid
+		) onum,
+		sr.sprscheme,
+		sr.sprsize,
+		sr.sprnum,
+		sr.spremarks,
+		sr.spstate
+		FROM
+		spcify_results sr,
+		spcify_shoes ss
+		WHERE
+		ss.spsid = sr.sp_sid
+	</sql>
+<!--	 查询订单
+	<select id="getOrders" parameterType="com.hpe.ssa.pojo.Orders" resultType="com.hpe.ssa.pojo.Orders">
+	SELECT
+	<include refid="Base_Column_List" />
+	FROM
+	receives r,
+	users u,
+	orders o
+	WHERE
+	o.ouid = u.uid
+	AND  r.recid=o.orecid AND o.ostate=#{ostate}
+	</select>-->
+	<!-- 查询订单 -->
+	<select id="getOrders" resultType="com.hpe.ssa.pojo.Orders">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM
+		receives r,
+		users u,
+		orders o
+		WHERE
+		o.ouid = u.uid
+		AND  r.recid=o.orecid AND o.ostate=#{ostate} LIMIT #{curPage},5
+	</select>
+<!--	<resultMap id="sss" type="com.hpe.ssa.pojo.Orders">
+		<id property="sprid" column="sprid"/>
+		<association property="orders" javaType="com.hpe.ssa.pojo.Orders">
+			<result property="ostate" column="ostate"/>
+		</association>
+		<association property="page" javaType="com.hpe.ssa.utils.Page">
+			<result property="curPage" column="curPage"/>
+		</association>
+	</resultMap>-->
+	<!-- 通过总记录数-->
+	<select id="selectAllSum" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM orders where ostate=#{ostate}
+	</select>
+	<select id="selectAllSumByNum" parameterType="String" resultType="int">
+		  SELECT COUNT(*) FROM orders where onum LIKE #{onum}
+	</select>
+	<!-- 通过订单号获取订单 -->
+	<select id="getOrdersByNum" resultType="com.hpe.ssa.pojo.Orders">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM
+		receives r,
+		users u,
+		orders o
+		WHERE
+		o.ouid = u.uid
+		AND  r.recid=o.orecid AND o.onum LIKE #{onum} limit #{curPage},5;
+	</select>
+	<!-- 发货 -->
+	<update id="sendOrder" parameterType="int">
+		UPDATE orders SET ostate=2 WHERE oid=#{id}
+	</update>
+	<!-- 订单详情 -->
+	<select id="viewDetails" parameterType="int" resultType="com.hpe.ssa.pojo.Orders">
+		SELECT
+		oid id,
+		(
+		SELECT
+		uaccount
+		FROM
+		users
+		WHERE
+		uid = ouid
+		) uaccount,
+		orecid,
+		ostate,
+		DATE_FORMAT(ordertime,'%Y-%m-%d %H:%i:%s') ordertime,
+		ototal,
+		oexpinfo,
+		onote
+		FROM
+		orders
+		WHERE
+		oid = #{id}
+	</select>
+	<!-- 通过定制订单名称获取订单 -->
+	<select id="getOrdersByName" parameterType="com.hpe.ssa.pojo.SpcifyResults" resultType="com.hpe.ssa.pojo.SpcifyResults">
+	<include refid="spcifyOrder" />
+	 AND ss.spsname LIKE #{spsname}
+	</select>
+	<!-- 定制订单查询 -->
+	<select id="getSpcifyOrders" resultType="com.hpe.ssa.pojo.SpcifyResults">
+	<include refid="spcifyOrder"/>
+	</select>
+	<!-- 定制订单发货 -->
+	<update id="sendSpcifyOrder" parameterType="int">
+		UPDATE spcify_results SET spstate=2 WHERE sprid=#{id}
+	</update>
+	<!-- 查看定制订单详情 -->
+	<select id="lookSpcifyOrders" parameterType="int" resultType="com.hpe.ssa.pojo.SpcifyResults">
+		SELECT
+		sprid,
+		(
+		SELECT
+		spsname
+		FROM
+		spcify_shoes
+		WHERE
+		spsid = sp_sid
+		) spsname,
+		(
+		SELECT
+		onum
+		FROM
+		orders
+		WHERE
+		sp_oid = oid
+		) onum,
+		sprscheme,
+		sprsize,
+		sprnum,
+		spremarks,
+		spstate
+		FROM
+		spcify_results WHERE sprid=#{sprid};
+	</select>
+</mapper>
