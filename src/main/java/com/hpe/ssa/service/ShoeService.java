@@ -3,6 +3,7 @@ package com.hpe.ssa.service;
 import com.hpe.ssa.pojo.ShoeSizes;
 import com.hpe.ssa.pojo.Shoes;
 import com.hpe.ssa.pojo.Shoes4List;
+import com.hpe.ssa.pojo.SpcifyShoes;
 
 import java.util.List;
 
@@ -15,5 +16,9 @@ public interface ShoeService {
     Shoes selectShoeDetailById(int sid);
     //新增鞋子
     int insertShoe(Shoes shoe);
+    //禁用以及撤销禁用
+    int updateShoeState(int delid,int del);
+    //修改鞋
+    int updateShoeInfo(Shoes shoe);
 
 }

@@ -180,5 +180,67 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 		</trim>
 	</insert>
-
+	<update id="updateShoeState" parameterType="com.hpe.ssa.pojo.Shoes">
+		UPDATE shoes SET sdelete=#{sdelete} WHERE sid = #{sid}
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.hpe.ssa.pojo.Shoes">
+		update shoes
+		<set >
+			<if test="stid != null" >
+				stid = #{stid,jdbcType=INTEGER},
+			</if>
+			<if test="sbid != null" >
+				sbid = #{sbid,jdbcType=INTEGER},
+			</if>
+			<if test="snum != null" >
+				snum = #{snum,jdbcType=VARCHAR},
+			</if>
+			<if test="sname != null" >
+				sname = #{sname,jdbcType=VARCHAR},
+			</if>
+			<if test="sprices != null" >
+				sprices = #{sprices,jdbcType=FLOAT},
+			</if>
+			<if test="sdiscount != null" >
+				sdiscount = #{sdiscount,jdbcType=INTEGER},
+			</if>
+			<if test="spubtime != null" >
+				spubtime = #{spubtime,jdbcType=DATE},
+			</if>
+			<if test="sproducer != null" >
+				sproducer = #{sproducer,jdbcType=VARCHAR},
+			</if>
+			<if test="sgender != null" >
+				sgender = #{sgender,jdbcType=VARCHAR},
+			</if>
+			<if test="scolor != null" >
+				scolor = #{scolor,jdbcType=VARCHAR},
+			</if>
+			<if test="sinfo != null" >
+				sinfo = #{sinfo,jdbcType=VARCHAR},
+			</if>
+			<if test="stimesold != null" >
+				stimesold = #{stimesold,jdbcType=INTEGER},
+			</if>
+			<if test="simage != null" >
+				simage = #{simage,jdbcType=VARCHAR},
+			</if>
+			<if test="sintegral != null" >
+				sintegral = #{sintegral,jdbcType=FLOAT},
+			</if>
+			<if test="sdetail != null" >
+				sdetail = #{sdetail,jdbcType=VARCHAR},
+			</if>
+			<if test="sdelete != null" >
+				sdelete = #{sdelete,jdbcType=INTEGER},
+			</if>
+			<if test="sremarks != null" >
+				sremarks = #{sremarks,jdbcType=VARCHAR},
+			</if>
+			<if test="sandroidimg != null" >
+				sandroidimg = #{sandroidimg,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where sid = #{sid,jdbcType=INTEGER}
+	</update>
 </mapper>

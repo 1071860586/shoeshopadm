@@ -61,4 +61,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 		</trim>
 	</insert>
+	<update id="updateBrandState" parameterType="com.hpe.ssa.pojo.Brands">
+		UPDATE brands SET bstate=#{bstate} WHERE bid = #{bid}
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.hpe.ssa.pojo.Brands" >
+		update brands
+		<set >
+			<if test="bname != null" >
+				bname = #{bname,jdbcType=VARCHAR},
+			</if>
+			<if test="bsex != null" >
+				bsex = #{bsex,jdbcType=VARCHAR},
+			</if>
+			<if test="bremarks != null" >
+				bremarks = #{bremarks,jdbcType=VARCHAR},
+			</if>
+			<if test="bstate != null" >
+				bstate = #{bstate,jdbcType=INTEGER},
+			</if>
+		</set>
+		where bid = #{bid,jdbcType=INTEGER}
+	</update>
 </mapper>

@@ -55,4 +55,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 		</trim>
 	</insert>
+	<update id="updateTypeState" parameterType="com.hpe.ssa.pojo.Types">
+		UPDATE types SET tdelete=#{tdelete} WHERE tid = #{tid}
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.hpe.ssa.pojo.Types" >
+		update types
+		<set >
+			<if test="tname != null" >
+				tname = #{tname,jdbcType=VARCHAR},
+			</if>
+			<if test="tremarks != null" >
+				tremarks = #{tremarks,jdbcType=VARCHAR},
+			</if>
+			<if test="tdelete != null" >
+				tdelete = #{tdelete,jdbcType=INTEGER},
+			</if>
+		</set>
+		where tid = #{tid,jdbcType=INTEGER}
+	</update>
 </mapper>

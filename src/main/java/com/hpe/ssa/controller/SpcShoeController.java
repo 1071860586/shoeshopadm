@@ -1,8 +1,10 @@
 package com.hpe.ssa.controller;
 
+import com.hpe.ssa.pojo.Shoes;
 import com.hpe.ssa.pojo.SpcifyShoes;
 import com.hpe.ssa.service.SpcShoeService;
 import com.hpe.ssa.utils.JsonUtils;
+import com.hpe.ssa.utils.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,5 +44,40 @@ public class SpcShoeController {
         mv.addObject("spcShoe", JsonUtils.objectToJson(spcifyShoe));
         mv.setViewName("pages/productManagement/spcshoesEdit");
         return mv;
+    }
+
+    @RequestMapping("/spcshoeinput")
+    public String showShoeAddPage(){
+        return "pages/productManagement/spcshoesAdd";
+    }
+
+    @RequestMapping(value = "/add/spcshoe",method = RequestMethod.POST)
+    @ResponseBody
+    public ResultUtil addNewSpcShoe(SpcifyShoes spcifyShoe){
+        System.out.println(spcifyShoe);
+        if (spcShoeService.insertSpcShoe(spcifyShoe) !=0){
+            return new ResultUtil("1","成功");
+        }else {
+            return new ResultUtil("0","失败");
+        }
+    }
+    @RequestMapping(value = "/delete/spcshoe/{spsid}",method = RequestMethod.GET)
+    @ResponseBody
+    public ResultUtil chgBrandState(@PathVariable int spsid){
+        if (spcShoeService.deleteSpcShoeById(spsid)!=0){
+            return new ResultUtil("1","成功");
+        }else {
+            return new ResultUtil("0","失败");
+        }
+    }
+
+    @RequestMapping(value = "/update/spcshoe",method = RequestMethod.POST)
+    @ResponseBody
+    public ResultUtil updateSpcShoeInfo(SpcifyShoes spcifyShoe){
+        if (spcShoeService.updateSpcShoeInfo(spcifyShoe)!=0){
+            return new ResultUtil("1","成功");
+        }else {
+            return new ResultUtil("0","失败");
+        }
     }
 }

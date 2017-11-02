@@ -53,6 +53,21 @@ public class ShoeServiceImpl implements ShoeService {
     }
 
     @Override
+    public int updateShoeState(int delid, int del) {
+        Shoes shoe= new Shoes();
+        shoe.setSid(delid);
+        shoe.setSdelete(del);
+        return shoesMapper.updateShoeState(shoe);
+    }
+
+    @Override
+    public int updateShoeInfo(Shoes shoe) {
+        shoe.setStid(Integer.valueOf(shoe.getTname()));
+        shoe.setSbid(Integer.valueOf(shoe.getBname()));
+        return shoesMapper.updateByPrimaryKeySelective(shoe);
+    }
+
+    @Override
     public int selectShoesNum() {
         return shoesMapper.selectShoesNum();
     }

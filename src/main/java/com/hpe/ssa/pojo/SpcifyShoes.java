@@ -1,6 +1,8 @@
 package com.hpe.ssa.pojo;
 
 
+import java.util.Arrays;
+
 public class SpcifyShoes {
     private Integer spsid;
     private Integer sp_tid;
@@ -17,12 +19,14 @@ public class SpcifyShoes {
     private Integer spscss;
     private String spremarks;
 
+    private Integer[] sizeChoose;
+
     public SpcifyShoes() {
     }
 
     public SpcifyShoes(Integer spsid, Integer sp_tid, String tname, Integer sp_bid, String bname, String spsseq,
                        String spsname, Float spsprices, String spscontent, Integer spspartnum, String spspartinfo,
-                       String spsgender, Integer spscss, String spremarks) {
+                       String spsgender, Integer spscss, String spremarks, Integer[] sizeChoose) {
         this.spsid = spsid;
         this.sp_tid = sp_tid;
         this.tname = tname;
@@ -37,6 +41,7 @@ public class SpcifyShoes {
         this.spsgender = spsgender;
         this.spscss = spscss;
         this.spremarks = spremarks;
+        this.sizeChoose = sizeChoose;
     }
 
     public Integer getSpsid() {
@@ -151,6 +156,14 @@ public class SpcifyShoes {
         this.spremarks = spremarks;
     }
 
+    public Integer[] getSizeChoose() {
+        return sizeChoose;
+    }
+
+    public void setSizeChoose(Integer[] sizeChoose) {
+        this.sizeChoose = sizeChoose;
+    }
+
     @Override
     public String toString() {
         return "SpcifyShoes{" +
@@ -168,6 +181,7 @@ public class SpcifyShoes {
                 ", spsgender='" + spsgender + '\'' +
                 ", spscss=" + spscss +
                 ", spremarks='" + spremarks + '\'' +
+                ", sizeChoose=" + Arrays.toString(sizeChoose) +
                 '}';
     }
 }

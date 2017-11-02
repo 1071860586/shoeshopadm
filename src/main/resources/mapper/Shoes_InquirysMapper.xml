@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hpe.ssa.mapper.Shoes_InquirysMapper" >
+    <sql id="Base_Column_List">
+        uname,sname,sqid,sq_uid,sq_sid,sqquestion,sqanswer,sqquestiontime,sqanswertime,sqremarks
+    </sql>
+    <resultMap id="ShoesInquirys" type="com.hpe.ssa.pojo.Shoes_Inquirys">
+        <id property="sqid" column="sqid"/>
+        <result property="sq_uid" column="sq_uid"/>
+        <result property="sq_sid" column="sq_sid"/>
+        <result property="sqquestion" column="sqquestion"/>
+        <result property="sqanswer" column="sqanswer"/>
+        <result property="sqquestiontime" column="sqquestiontime"/>
+        <result property="sqanswertime" column="sqanswertime"/>
+        <result property="sqremarks" column="sqremarks"/>
+        <result property="uname" column="uname"/>
+        <result property="sname" column="sname"/>
+    </resultMap>
+    <select id="selectBySqid" parameterType="java.lang.Integer" resultMap="ShoesInquirys" >
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM shoes_inquirys,users,shoes
+        WHERE sqid=#{sqid} AND sq_uid=uid AND sq_sid=sid
+    </select>
+    <select id="selectShoes_InquirysList" parameterType="java.lang.Integer" resultMap="ShoesInquirys" >
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM shoes_inquirys,users,shoes
+        WHERE sq_uid=uid AND sq_sid=sid
+        ORDER BY sqid
+        LIMIT #{index},4
+    </select>
+    <select id="selectInquirysNum" resultType="java.lang.Integer">
+        SELECT COUNT(sqid)
+        FROM shoes_inquirys
+    </select>
+    <update id="updateShoes_Inquirys" >
+        UPDATE shoes_inquirys
+        <set>
+                sqanswer=#{arg1,jdbcType=VARCHAR}
+        </set>
+        WHERE
+            sqid=#{arg0,jdbcType=INTEGER}
+    </update>
+</mapper>

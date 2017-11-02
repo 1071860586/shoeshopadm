@@ -16,4 +16,8 @@ public interface TypeService {
     List<Types> selectTypeNames();
     //新增种类
     int insertType(Types type);
+    //禁用以及撤销禁用
+    int updateTypeState(int delid,int del);
+    //修改类型
+    int updateTypeInfo(Types type);
 }

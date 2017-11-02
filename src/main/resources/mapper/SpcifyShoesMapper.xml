@@ -23,4 +23,135 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM spcify_shoes,types,brands
 		WHERE sp_tid=tid AND sp_bid=bid AND spsid=#{spsid}
 	</select>
+	<insert id="insertSpcShoeSize" parameterType="java.util.List">
+		insert into sps_sizes(sp_sid,sp_zid,spsstate,spremarks)
+		values
+		<foreach collection="list" item="item" index="index" separator=",">
+			(#{item.s_sid},#{item.s_sizeid},#{item.sstate},#{item.ssremarks})
+		</foreach>
+	</insert>
+	<insert id="insertSelective" useGeneratedKeys="true" keyProperty="spsid" parameterType="com.hpe.ssa.pojo.SpcifyShoes" >
+		insert into spcify_shoes
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="spsid != null" >
+				spsid,
+			</if>
+			<if test="sp_tid != null" >
+				sp_tid,
+			</if>
+			<if test="sp_bid != null" >
+				sp_bid,
+			</if>
+			<if test="spsseq != null" >
+				spsseq,
+			</if>
+			<if test="spsname != null" >
+				spsname,
+			</if>
+			<if test="spsprices != null" >
+				spsprices,
+			</if>
+			<if test="spscontent != null" >
+				spscontent,
+			</if>
+			<if test="spspartnum != null" >
+				spspartnum,
+			</if>
+			<if test="spspartinfo != null" >
+				spspartinfo,
+			</if>
+			<if test="spsgender != null" >
+				spsgender,
+			</if>
+			<if test="spscss != null" >
+				spscss,
+			</if>
+			<if test="spremarks != null" >
+				spremarks,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="spsid != null" >
+				#{spsid,jdbcType=INTEGER},
+			</if>
+			<if test="sp_tid != null" >
+				#{sp_tid,jdbcType=INTEGER},
+			</if>
+			<if test="sp_bid != null" >
+				#{sp_bid,jdbcType=INTEGER},
+			</if>
+			<if test="spsseq != null" >
+				#{spsseq,jdbcType=VARCHAR},
+			</if>
+			<if test="spsname != null" >
+				#{spsname,jdbcType=VARCHAR},
+			</if>
+			<if test="spsprices != null" >
+				#{spsprices,jdbcType=FLOAT},
+			</if>
+			<if test="spscontent != null" >
+				#{spscontent,jdbcType=VARCHAR},
+			</if>
+			<if test="spspartnum != null" >
+				#{spspartnum,jdbcType=INTEGER},
+			</if>
+			<if test="spspartinfo != null" >
+				#{spspartinfo,jdbcType=VARCHAR},
+			</if>
+			<if test="spsgender != null" >
+				#{spsgender,jdbcType=VARCHAR},
+			</if>
+			<if test="spscss != null" >
+				#{spscss,jdbcType=INTEGER},
+			</if>
+			<if test="spremarks != null" >
+				#{spremarks,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.hpe.ssa.pojo.SpcifyShoes">
+		update spcify_shoes
+		<set >
+			<if test="sp_tid != null" >
+				sp_tid = #{sp_tid,jdbcType=INTEGER},
+			</if>
+			<if test="sp_bid != null" >
+				sp_bid = #{sp_bid,jdbcType=INTEGER},
+			</if>
+			<if test="spsseq != null" >
+				spsseq = #{spsseq,jdbcType=VARCHAR},
+			</if>
+			<if test="spsname != null" >
+				spsname = #{spsname,jdbcType=VARCHAR},
+			</if>
+			<if test="spsprices != null" >
+				spsprices = #{spsprices,jdbcType=FLOAT},
+			</if>
+			<if test="spscontent != null" >
+				spscontent = #{spscontent,jdbcType=VARCHAR},
+			</if>
+			<if test="spspartnum != null" >
+				spspartnum = #{spspartnum,jdbcType=INTEGER},
+			</if>
+			<if test="spspartinfo != null" >
+				spspartinfo = #{spspartinfo,jdbcType=VARCHAR},
+			</if>
+			<if test="spsgender != null" >
+				spsgender = #{spsgender,jdbcType=VARCHAR},
+			</if>
+			<if test="spscss != null" >
+				spscss = #{spscss,jdbcType=INTEGER},
+			</if>
+			<if test="spremarks != null" >
+				spremarks = #{spremarks,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where spsid = #{spsid,jdbcType=INTEGER}
+	</update>
+	<delete id="deleteSpcShoeById" parameterType="java.lang.Integer">
+		DELETE FROM spcify_shoes WHERE spsid=#{spsid}
+	</delete>
+	<delete id="deleteSpcShoeSize" parameterType="java.lang.Integer">
+		DELETE FROM sps_sizes WHERE sp_sid=#{spsid}
+	</delete>
 </mapper>

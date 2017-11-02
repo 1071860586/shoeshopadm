@@ -1,6 +1,5 @@
 package com.hpe.ssa.controller;
 
-import com.hpe.ssa.pojo.Brands;
 import com.hpe.ssa.pojo.Types;
 import com.hpe.ssa.service.TypeService;
 import com.hpe.ssa.utils.JsonUtils;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
 import java.util.List;
 
 @Controller
@@ -62,6 +60,25 @@ public class TypeController {
     @ResponseBody
     public ResultUtil addNewType(Types type){
         if (typeService.insertType(type) !=0){
+            return new ResultUtil("1","成功");
+        }else {
+            return new ResultUtil("0","失败");
+        }
+    }
+    @RequestMapping(value = "/chg/type/state",method = RequestMethod.GET)
+    @ResponseBody
+    public ResultUtil chgBrandState(int delid,int del){
+        if (typeService.updateTypeState(delid,del)!=0){
+            return new ResultUtil("1","成功");
+        }else {
+            return new ResultUtil("0","失败");
+        }
+    }
+
+    @RequestMapping(value = "/update/type",method = RequestMethod.POST)
+    @ResponseBody
+    public ResultUtil updateTypeInfo(Types type){
+        if (typeService.updateTypeInfo(type)!=0){
             return new ResultUtil("1","成功");
         }else {
             return new ResultUtil("0","失败");

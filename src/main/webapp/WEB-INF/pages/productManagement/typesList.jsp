@@ -116,9 +116,9 @@
                     $tr.append("<td>"+item.tid+"</td>");
                     $tr.append("<td>"+item.tname+"</td>");
                     if(item.tdelete ==0) {
-                        str = "<a class=\"dela\" id=\"del"+item.tid+"\" href=\"javascript:void(0)\" delid=\""+item.tid+"\" del=\"1\">禁用</a>";
+                        str = "<a class=\"dela\" id=\"del"+item.tid+"\" href=\"javascript:void(0)\" onclick='banType(this)' data-delid=\""+item.tid+"\" data-del=\"1\">禁用</a>";
                     }else {
-                        str = "<a class=\"dela\" id=\"del"+item.tid+"\" href=\"javascript:void(0)\" delid=\""+item.tid+"\" del=\"0\">撤销禁用</a>"
+                        str = "<a class=\"dela\" id=\"del"+item.tid+"\" href=\"javascript:void(0)\" onclick='banType(this)' data-delid=\""+item.tid+"\" data-del=\"0\">撤销禁用</a>"
                     }
                     $tr.append("<td><a href=\"edit/type/"+item.tid+
                         "\" title=\"修改\"><i class=\"fa fa-pencil\"></i>修改</a>&nbsp;&nbsp;"+str+"</td>");
@@ -129,6 +129,33 @@
             }
         });
         setPage(pageNum, totalPage, "getTypes");
+    }
+    function banType(e) {
+        var delid = e.getAttribute("data-delid");
+        var del = e.getAttribute("data-del");
+        $.ajax({
+            url : "chg/type/state",
+            type : "GET",
+            async : "true",
+            data : {"delid":delid,"del":del},
+            dataType : "json",
+            success : function(data) {
+                if (data.res == 1){
+                    alert(data.info);
+                    var state = document.getElementById("del"+delid);
+                    if (del ==1){
+                        state.setAttribute("data-del",0);
+                        state.innerText="撤销禁用";
+                    }else {
+                        state.setAttribute("data-del",1);
+                        state.innerText="禁用";
+                    }
+                }
+                else {
+                    $(".text-warning").text(data.info);
+                }
+            }
+        });
     }
 </script>
 </body>

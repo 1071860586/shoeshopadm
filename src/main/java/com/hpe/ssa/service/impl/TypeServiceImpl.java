@@ -37,4 +37,17 @@ public class TypeServiceImpl implements TypeService {
     public int insertType(Types type) {
         return typesMapper.insertSelective(type);
     }
+
+    @Override
+    public int updateTypeState(int delid, int del) {
+        Types type = new Types();
+        type.setTid(delid);
+        type.setTdelete(del);
+        return typesMapper.updateTypeState(type);
+    }
+
+    @Override
+    public int updateTypeInfo(Types type) {
+        return typesMapper.updateByPrimaryKeySelective(type);
+    }
 }

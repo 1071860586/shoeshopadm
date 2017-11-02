@@ -16,4 +16,8 @@ public interface BrandsMapper {
     List<Brands> selectBrandNames();
     //新增品牌
     int insertSelective(Brands brand);
+    //禁用以及撤销禁用
+    int updateBrandState(Brands brand);
+    //修改品牌
+    int updateByPrimaryKeySelective(Brands brand);
 }

@@ -8,20 +8,19 @@
 <head>
     <base href="<%=basePath%>">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>鞋子修改</title>
+    <title>定制鞋子添加</title>
 </head>
 <body class="theme-3">
 <jsp:include page="../common/common_head.jsp" flush="false"/>
 <jsp:include page="../common/common_left.jsp" flush="false"/>
 <div class="content">
     <div class="header">
-        <h1 class="page-title">鞋子信息修改</h1>
+        <h1 class="page-title">添加一种新的定制鞋</h1>
     </div>
 
     <div class="main-content">
         <div class="row">
-            <form class="form-horizontal col-sm-offset-2" id="editshoeinfo" method="post" >
-                <input type="text"  name="sid" hidden>
+            <form class="form-horizontal col-sm-offset-2" id="editspcshoeinfo" method="post" >
                 <div class="form-group">
                     <label for="tname" class="col-sm-2 control-label">鞋子类型：</label>
                     <div class="col-sm-4">
@@ -35,63 +34,42 @@
 
                         </select>
                     </div>
-                    <label for="snum" class="col-sm-2 control-label">序列号：</label>
+                    <label for="spsseq" class="col-sm-2 control-label">序列号：</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" id="snum" name="snum" >
+                        <input type="text" class="form-control" id="spsseq" name="spsseq" >
                     </div>
-                    <label for="sname" class="col-sm-2 control-label">鞋子名称：</label>
+                    <label for="spsname" class="col-sm-2 control-label">鞋子名称：</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" id="sname" name="sname" >
+                        <input type="text" class="form-control" id="spsname" name="spsname" >
                     </div>
-                    <label for="sprices" class="col-sm-2 control-label">鞋子价格：</label>
+                    <label for="spsprices" class="col-sm-2 control-label">鞋子价格：</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" id="sprices" name="sprices" >
+                        <input type="text" class="form-control" id="spsprices" name="spsprices" >
                     </div>
-                    <label for="spubtime" class="col-sm-2 control-label">发布时间：</label>
+                    <label for="spspartnum" class="col-sm-2 control-label">部件个数：</label>
                     <div class="col-sm-4">
-                        <input type="date" class="form-control" id="spubtime" name="spubtime" >
+                        <input type="number" class="form-control" id="spspartnum" name="spspartnum" >
                     </div>
-                    <label for="sproducer" class="col-sm-2 control-label">生产商：</label>
+                    <label for="spspartinfo" class="col-sm-2 control-label">部件信息：</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" id="sproducer" name="sproducer" >
+                        <input type="text" class="form-control" id="spspartinfo" name="spspartinfo" >
                     </div>
-                    <label for="sgender" class="col-sm-2 control-label">男女款式：</label>
+                    <label for="spsgender" class="col-sm-2 control-label">男女款式：</label>
                     <div class="col-sm-4">
                         <label class="radio-inline">
-                            <input type="radio" id="sgender" name="sgender" value="男" checked> 男
+                            <input type="radio" id="spsgender" name="spsgender" value="男" checked> 男
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="sgender" value="女"> 女
+                            <input type="radio" name="spsgender" value="女"> 女
                         </label>
                     </div>
-                    <label for="scolor" class="col-sm-2 control-label">颜色：</label>
+                    <label for="spscss" class="col-sm-2 control-label">鞋子CSS：</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" id="scolor" name="scolor">
+                        <input type="text" class="form-control" id="spscss" name="spscss">
                     </div>
-                    <label for="sinfo" class="col-sm-2 control-label">相关信息：</label>
+                    <label for="spremarks" class="col-sm-2 control-label">详细信息：</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" id="sinfo" name="sinfo">
-                    </div>
-                    <label for="stimesold" class="col-sm-2 control-label">卖出数量：</label>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" id="stimesold" name="stimesold">
-                    </div>
-                    <label for="sdetail" class="col-sm-2 control-label">详细信息：</label>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" id="sdetail" name="sdetail" >
-                    </div>
-                    <label for="sintegral" class="col-sm-2 control-label">鞋子积分：</label>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" id="sintegral" name="sintegral">
-                    </div>
-                    <label for="sdelete" class="col-sm-2 control-label">状态：</label>
-                    <div class="col-sm-4">
-                        <label class="radio-inline">
-                            <input type="radio" id="sdelete" name="sdelete" value="0" checked>启用
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="sdelete" value="1"> 禁用
-                        </label>
+                        <input type="text" class="form-control" id="spremarks" name="spremarks" >
                     </div>
                     <label class="col-sm-2 control-label">选择尺寸：</label>
                     <div class="col-sm-4">
@@ -137,12 +115,11 @@
                         <label class="checkbox">
                             <input type="checkbox" name="sizeChoose" value="14">48.0 num
                         </label>
-                        <%--<label for="simage" class="col-sm-2 control-label">继续上传图片：</label>--%>
-                        <%--<div class="col-sm-4">--%>
-                            <%--<input type="file" class="form-control" id="simage" name="simage" >--%>
-                        <%--</div>--%>
                     </div>
-
+                    <%--<label for="simage" class="col-sm-2 control-label">继续上传图片：</label>--%>
+                    <%--<div class="col-sm-4">--%>
+                    <%--<input type="file" class="form-control" id="simage" name="simage" >--%>
+                    <%--</div>--%>
                 </div>
                 <div class="form-group has-error">
                     <div class="col-sm-offset-2 col-sm-4 col-xs-6 ">
@@ -151,13 +128,11 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-3 col-xs-12">
-                        <button type="button" class="btn btn-success" data-toggle="modal"
-                                onclick="editshoeinfo();">提交</button>
+                        <button type="button" class="btn btn-success"  onclick="addspcshoe();">提交</button>
                     </div>
                 </div>
             </form>
         </div>
-
         <div class="modal small fade" id="myModal" tabindex="-1"
              role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -185,60 +160,18 @@
     </div>
 </div>
 <script>
-    $(function () {
-        setShoeDetail();
+    $(function(){
+        setTimeout(function () {
+            getTname();
+            getBname();
+        },1000);
     });
-    function getMyDate(str){
-        var oDate = new Date(str),
-            oYear = oDate.getFullYear(),
-            oMonth = oDate.getMonth()+1,
-            oDay = oDate.getDate(),
-            oTime = oYear +'-'+ getzf(oMonth) +'-'+ getzf(oDay);
-        return oTime;
-    }
-    //补0操作
-    function getzf(num){
-        if(parseInt(num) < 10){
-            num = '0'+num;
-        }
-        return num;
-    }
-    function setShoeDetail() {
-        var shoe = ${requestScope.shoe};
-        $("input[name='sid']").val(shoe.sid);
-        $("select[name='tname']").append("<option value=\'"+shoe.stid+"\' selected>"+shoe.tname+"</option>");
-        $("select[name='bname']").append("<option value=\'"+shoe.sbid+"\' selected>"+shoe.bname+"</option>");
-        $("input[name='snum']").val(shoe.snum);
-        $("input[name='sname']").val(shoe.sname);
-        $("input[name='sprices']").val(shoe.sprices);
-        $("input[name='sproducer']").val(shoe.sproducer);
-        var time = getMyDate(shoe.spubtime);
-        $("input[name='spubtime']").val(time);
-        $("input[name='scolor']").val(shoe.scolor);
-        $("input[name='sinfo']").val(shoe.sinfo);
-        $("input[name='stimesold']").val(shoe.stimesold);
-        $("input[name='sdetail']").val(shoe.sdetail);
-        $("input[name='sintegral']").val(shoe.sintegral);
-        $("input[name='sgender'][value='shoe.sgender']").attr("checked",true);
-        $("input[value="+shoe.sgender+"]").attr("checked",'checked');
-        $("input[name='sdelete'][value='shoe.sdelete']").attr("checked",true);
-        $("input[value="+shoe.sdelete+"]").attr("checked",'checked');
-        var sizeList = $("input[name='sizeChoose']");
-        $.each(shoe.sizeList,function (index, item) {
-            $.each(sizeList,function (inner_index,inner_item) {
-                if(item.sizeid==inner_item.value){
-                    inner_item.checked=true;
-                }
-            })
-        })
-    }
-
-    function editshoeinfo() {
+    function addspcshoe() {
         $.ajax({
-            url : "update/shoe",
+            url : "add/spcshoe",
             type : "POST",
             async : "true",
-            data : $("#editshoeinfo").serialize(),
+            data : $("#editspcshoeinfo").serialize(),
             dataType : "json",
             success : function(data) {
                 if (data.res == 1){
@@ -248,6 +181,52 @@
                 else {
                     $(".text-warning").text(data.info);
                 }
+            }
+        });
+    }
+    function getTname(){
+        $.ajax({
+            url : "get/tname",
+            type : "GET",
+            async : "true",
+            dataType : "json",
+            success : function(data) {
+                var frag = document.createDocumentFragment();
+                $.each(data,function (index,item) {
+                    var op = document.createElement("option");
+                    op.setAttribute("value",item.tid);
+                    op.appendChild(document.createTextNode(item.tname));
+//                    var option="<option value=\'"+item.bid+"\'>"+item.bname+"</option>";
+                    frag.appendChild(op);
+                });
+//                $("select#tname").append(frag);
+                document.getElementById("tname").appendChild(frag);
+            },
+            error:function () {
+                alert("获取品牌失败")
+            }
+        });
+    }
+    function getBname(){
+        $.ajax({
+            url : "get/bname",
+            type : "GET",
+            async : "true",
+            dataType : "json",
+            success : function(data) {
+                var frag = document.createDocumentFragment();
+                $.each(data,function (index,item) {
+                    var op = document.createElement("option");
+                    op.setAttribute("value",item.bid);
+                    op.appendChild(document.createTextNode(item.bname));
+//                    var option="<option value=\'"+item.bid+"\'>"+item.bname+"</option>";
+                    frag.appendChild(op);
+                });
+//                $("select#bname").append(frag);
+                document.getElementById("bname").appendChild(frag);
+            },
+            error:function () {
+                alert("获取品牌失败")
             }
         });
     }

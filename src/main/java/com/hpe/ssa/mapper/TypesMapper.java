@@ -16,4 +16,8 @@ public interface TypesMapper {
     List<Types> selectTypeNames();
     //新增种类
     int insertSelective(Types type);
+    //禁用以及撤销禁用
+    int updateTypeState(Types type);
+    //修改类型
+    int updateByPrimaryKeySelective(Types type);
 }

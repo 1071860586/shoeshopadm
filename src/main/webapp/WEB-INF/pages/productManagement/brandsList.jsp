@@ -118,9 +118,9 @@
                     $tr.append("<td>"+item.bname+"</td>");
                     $tr.append("<td>"+item.bsex+"</td>");
                     if(item.bstate ==0) {
-                        str = "<a class=\"dela\" id=\"del"+item.bid+"\" href=\"javascript:void(0)\" delid=\""+item.bid+"\" del=\"1\">禁用</a>";
+                        str = "<a class=\"dela\" id=\"del"+item.bid+"\" href=\"javascript:void(0)\" onclick='banBrand(this)' data-delid=\""+item.bid+"\" data-del=\"1\">禁用</a>";
                     }else {
-                        str = "<a class=\"dela\" id=\"del"+item.bid+"\" href=\"javascript:void(0)\" delid=\""+item.bid+"\" del=\"0\">撤销禁用</a>"
+                        str = "<a class=\"dela\" id=\"del"+item.bid+"\" href=\"javascript:void(0)\" onclick='banBrand(this)' data-delid=\""+item.bid+"\" data-del=\"0\">撤销禁用</a>"
                     }
                     $tr.append("<td><a href=\"edit/brand/"+item.bid+
                         "\" title=\"修改\"><i class=\"fa fa-pencil\"></i>修改</a>&nbsp;&nbsp;"+str+"</td>");
@@ -131,6 +131,34 @@
             }
         });
         setPage(pageNum, totalPage, "getBrands");
+    }
+    function banBrand(e) {
+        var delid = e.getAttribute("data-delid");
+        var del = e.getAttribute("data-del");
+        $.ajax({
+            url : "chg/brand/state",
+            type : "GET",
+            async : "true",
+            data : {"delid":delid,"del":del},
+            dataType : "json",
+            success : function(data) {
+                if (data.res == 1){
+                    alert(data.info);
+                    var state = document.getElementById("del"+delid);
+                    if (del ==1){
+                        state.setAttribute("data-del",0);
+                        state.innerText="撤销禁用";
+                    }else {
+                        state.setAttribute("data-del",1);
+                        state.innerText="禁用";
+                    }
+//                    window.location.reload();
+                }
+                else {
+                    $(".text-warning").text(data.info);
+                }
+            }
+        });
     }
 </script>
 </body>

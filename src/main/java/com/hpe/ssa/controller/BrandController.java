@@ -65,4 +65,24 @@ public class BrandController {
             return new ResultUtil("0","失败");
         }
     }
+
+    @RequestMapping(value = "/chg/brand/state",method = RequestMethod.GET)
+    @ResponseBody
+    public ResultUtil chgBrandState(int delid,int del){
+        if (brandService.updateBrandState(delid,del)!=0){
+            return new ResultUtil("1","成功");
+        }else {
+            return new ResultUtil("0","失败");
+        }
+    }
+
+    @RequestMapping(value = "/update/brand",method = RequestMethod.POST)
+    @ResponseBody
+    public ResultUtil updateTypeInfo(Brands brand){
+        if (brandService.updateBrandInfo(brand)!=0){
+            return new ResultUtil("1","成功");
+        }else {
+            return new ResultUtil("0","失败");
+        }
+    }
 }

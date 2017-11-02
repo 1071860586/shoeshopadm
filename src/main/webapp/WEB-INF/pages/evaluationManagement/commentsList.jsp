@@ -1,31 +1,40 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
+
 <html>
 <head>
     <base href="<%=basePath%>">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>定制鞋子列表</title>
+    <title>评价列表</title>
+    <style>
+        .template{
+            display:none;
+        }
+    </style>
+
 </head>
 <body class="theme-3">
 <jsp:include page="../common/common_head.jsp" flush="false"/>
 <jsp:include page="../common/common_left.jsp" flush="false"/>
 <div class="content">
     <div class="header">
-        <h1 class="page-title">定制鞋子列表</h1>
+        <h1 class="page-title">全部商品评价列表</h1>
     </div>
 
     <div class="main-content">
         <div class="row">
             <div class="btn-toolbar list-toolbar col-lg-4">
-                <a class="btn btn-primary" href="spcshoeinput">
-                    <i class="fa fa-plus"></i> 新增定制鞋</a>
+                <!-- <a class="btn btn-primary" href="userInput.jsp">
+                    <i class="fa fa-plus"></i> 新增用户
+                </a> -->
                 <!-- <a class="btn btn-default">导出</a> -->
             </div>
-            <form class="form-inline" action="get/spcshoe">
+            <form class="form-inline" action="get/comment">
                 <input type="search" class="input-sm" name="search" value="${search }">
                 <button type="submit" class="btn"><i class="fa fa-search"></i>查询</button>
             </form>
@@ -33,19 +42,15 @@
         <table id="shoelistab" class="table table-striped table-bordered table-hover">
             <thead>
             <tr>
-                <th>编号</th>
-                <th>类型</th>
-                <th>品牌</th>
-                <th>价格</th>
-                <th>序列号</th>
-                <th>名称</th>
-                <th>性别</th>
-                <th>部件个数</th>
-                <th>部件信息</th>
+                <th>用户名称</th>
+                <th>鞋子名称</th>
+                <th>评价内容</th>
+                <th>评价时间</th>
+                <th>评价星级</th>
                 <th>处理</th>
             </tr>
             </thead>
-            <tbody id="spcshoe">
+            <tbody id="comment">
             <tr class="template">
             </tr>
             </tbody>
@@ -87,13 +92,12 @@
         getTotalNum();
         //异步加载返回数据时间不确定，所以直接获取pageNum可能没有变化，等待0.5秒之后再设置分页
         setTimeout(function () {
-            getSpcShoes(pageNum);
+            getComments(pageNum);
         },500);
     });
-    //合并
     function getTotalNum() {
         $.ajax({
-            url:"get/spcshoe/tnum",
+            url:"commentsnum",
             type:"GET",
             async:"true",
             dataType:"json",
@@ -102,11 +106,11 @@
             }
         });
     }
-    function getSpcShoes(pageNum){
+    function getComments(pageNum){
         index =(pageNum-1)*10;
         $("tr").remove(".flag");
         $.ajax({
-            url : "get/spcshoeslist",
+            url : "get/commentslist",
             type : "GET",
             async : "true",
             data : {"index":index},
@@ -121,44 +125,25 @@
 //                    clonedTr.removeClass("template");
                     var $tr=$("<tr></tr>");
                     $tr.addClass("flag");  //有时间尝试classList
-                    $tr.append("<td>"+item.spsid+"</td>");
-                    $tr.append("<td>"+item.tname+"</td>");
-                    $tr.append("<td>"+item.bname+"</td>");
-                    $tr.append("<td>"+item.spsprices+"</td>");
-                    $tr.append("<td>"+item.spsseq+"</td>");
-                    $tr.append("<td>"+item.spsname+"</td>");
-                    $tr.append("<td>"+item.spsgender+"</td>");
-                    $tr.append("<td>"+item.spspartnum+"</td>");
-                    $tr.append("<td>"+item.spspartinfo+"</td>");
-                    //delete/spcshoe/"+item.spsid+"
-                    $tr.append("<td><a href=\"edit/spcshoe/"+item.spsid+
-                        "\" title=\"修改\"><i class=\"fa fa-pencil\"></i>修改</a>&nbsp;&nbsp;"
-                        +"<a href='javascript:void(0)' onclick='delSpcShoe(this)' data-delid='"+item.spsid+"' title='删除'><i class='fa fa-pencil'></i>删除</a></td>");
+                    $tr.append("<td>"+item.uname+"</td>");
+                    $tr.append("<td>"+item.sname+"</td>");
+                    $tr.append("<td>"+item.sccomments+"</td>");
+                    $tr.append("<td>"+item.sctime+"</td>");
+                    $tr.append("<td>"+item.scscore+"</td>");
+/*                    if(item.sdelete ==0) {
+                        str = "<a class=\"dela\" id=\"del"+item.cid+"\" href=\"javascript:void(0)\" delid=\""+item.cid+"\" del=\"1\">选中</a>";
+                    }else {
+                        str = "<a class=\"dela\" id=\"del"+item.cid+"\" href=\"javascript:void(0)\" delid=\""+item.cid+"\" del=\"0\">撤销选中</a>"
+                    }*/
+                    $tr.append("<td><a href=\"del/comment/"+item.cid+
+                        "\" title=\"删除\"><i class=\"fa fa-pencil\"></i>删除</a></td>");
                     frag.appendChild($tr.get(0));
                 });
-                document.getElementById("spcshoe").appendChild(frag);
+                document.getElementById("comment").appendChild(frag);
 //                $("#shoe").appendChild(frag);
             }
         });
-        setPage(pageNum, totalPage, "getSpcShoes");
-    }
-    function delSpcShoe(e) {
-        var delid = e.getAttribute("data-delid");
-        $.ajax({
-            url : "/delete/spcshoe/"+delid,
-            type : "GET",
-            async : "true",
-            dataType : "json",
-            success : function(data) {
-                if (data.res == 1){
-                    alert(data.info);
-                    window.location.reload();
-                }
-                else {
-                    $(".text-warning").text(data.info);
-                }
-            }
-        });
+        setPage(pageNum, totalPage, "getComments");
     }
 </script>
 </body>
