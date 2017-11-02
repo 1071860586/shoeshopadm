@@ -51,5 +51,15 @@ public class Page<T> {
 	public void setData(List<T> data) {
 		this.data = data;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Page{" +
+				"curPage=" + curPage +
+				", totalPage=" + totalPage +
+				", rows=" + rows +
+				", pageNumber=" + pageNumber +
+				", data=" + data +
+				'}';
+	}
 }
