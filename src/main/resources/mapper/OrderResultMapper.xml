@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hpe.ssa.mapper.OrderResultMapper">
+
+    <select id="getnum" resultType="com.hpe.ssa.pojo.Result">
+    SELECT  sum(e.os) otatol,b.bname
+    from (SELECT  o_sid,sum(osnum) os FROM orders o,order_shoes s WHERE o.oid=s.o_oid GROUP BY s.o_sid) e,(SELECT sid,bname FROM brands,shoes WHERE  sbid=bid) b
+
+    where e.o_sid=b.sid
+
+   GROUP BY b.bname
+    </select>
+
+
+    <select id="getResult" resultType="com.hpe.ssa.pojo.Result">
+    SELECT  sum(e.os) totalMoney,b.bname
+    from (SELECT  o_sid,sum(ototal) os FROM orders o,order_shoes s WHERE o.oid=s.o_oid GROUP BY s.o_sid) e,(SELECT sid,bname FROM brands,shoes WHERE  sbid=bid) b
+
+    where e.o_sid=b.sid
+
+    GROUP BY b.bname
+    </select>
+</mapper>
