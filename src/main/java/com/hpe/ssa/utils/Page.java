@@ -17,7 +17,7 @@ public class Page<T> {
 	//数据库记录数
 	private int rows;
 	//每页数据量
-	private int pageNumber = 5;
+	private int pageNumber = 10;
 	//要展示的List数据
 	private List<T> data = new ArrayList<T>();
 	
@@ -51,5 +51,15 @@ public class Page<T> {
 	public void setData(List<T> data) {
 		this.data = data;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Page{" +
+				"curPage=" + curPage +
+				", totalPage=" + totalPage +
+				", rows=" + rows +
+				", pageNumber=" + pageNumber +
+				", data=" + data +
+				'}';
+	}
 }

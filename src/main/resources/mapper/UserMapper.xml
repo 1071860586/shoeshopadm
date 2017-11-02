@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hpe.ssa.mapper.UserMapper">  <!--命名空间，用于隔离sql语句。-->
+
+
+
+    <!--用户登录-->
+    <select id="loginUser" parameterType="com.hpe.ssa.pojo.Users" resultType="com.hpe.ssa.pojo.Users">
+        select * from users WHERE uaccount=#{uaccount} and upwd=#{upwd}
+    </select>
+    <!--用户信息分页显示-->
+    <select id="selectAll" parameterType="com.hpe.ssa.utils.Page" resultType="com.hpe.ssa.pojo.Users">
+        select * from users limit #{curPage},#{pageNumber}
+    </select>
+    <!--总记录数-->
+    <select id="selectAllSum" resultType="_int">
+        select COUNT(*) from users
+    </select>
+    <!--更改用户权限-->
+    <update id="delUsers" parameterType="com.hpe.ssa.pojo.Users">
+        UPDATE users SET udelete=#{udelete} WHERE uid=#{uid}
+    </update>
+    <!--查询操作-->
+    <select id="users" parameterType="String" resultType="com.hpe.ssa.pojo.Users">
+        SELECT * from users where uname LIKE '%${_parameter}%' OR uaccount LIKE '%${_parameter}%'
+       /*传入参数为String类型时，动态sql语句使用时，不管你的参数具体是什么，都要改成"_parameter"
+         传入参数为基本类型时，只能传递一个参数*/
+    </select>
+    <!--通过用户ID查询用户信息-->
+    <select id="selectById" resultType="com.hpe.ssa.pojo.Users" parameterType="_int">
+        select * FROM users where uid=#{uid}
+    </select>
+    <!--编辑用户信息-->
+    <update id="saveUsers" parameterType="com.hpe.ssa.pojo.Users">
+        UPDATE users SET uaccount=#{uaccount},uname=#{uname},ugender=#{ugender},uemail=#{uemail},utel=#{utel},uremarks=#{uremarks},uintegral=#{uintegral} WHERE uid=#{uid}
+    </update>
+
+</mapper>

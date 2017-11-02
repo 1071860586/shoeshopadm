@@ -7,13 +7,13 @@
 <title>快乐买后台管理</title>
 </head>
 <body class="theme-3">
-	<jsp:include page="../common/common_head.jsp" flush="false"></jsp:include>
-	<jsp:include page="../common/common_left.jsp" flush="false"></jsp:include>
+	<jsp:include page="../common/common_head.jsp" flush="false"/>
+	<jsp:include page="../common/common_left.jsp" flush="false"/>
 	<div class="content">
 	<h1>快乐买后台管理</h1>
 	
 	</div>
-	<jsp:include page="../common/common_foot.jsp" flush="false"></jsp:include>
+	<jsp:include page="../common/common_foot.jsp" flush="false"/>
 	
 </body>
 </html>
