@@ -64,7 +64,7 @@
 						     timeStyle:FULL, LONG, MEDIUM, SHORT, 或 DEFAULT
 						--%>
 						<td><fmt:formatDate value="${user.uregtime}" type="both" dateStyle="medium" timeStyle="medium"></fmt:formatDate></td>
-						<td><a href="editUsers.action?id=${user.uid} " title="修改"><i class="fa fa-pencil"></i></a>
+						<td><a href="editUsers.action?id=${user.uid} " title="修改"><i class="fa fa-pencil"></i>修改</a>
 							<c:if test="${user.udelete==0}">
 								<a class="dela" id="del${user.uid }" href="javascript:void(0)" delid="${user.uid }" del="1">禁用</a>
 							</c:if>

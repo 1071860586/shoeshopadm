@@ -65,7 +65,7 @@ public class ControllerUser {
             page.setData(usersList);
             modelAndView.addObject("page",page);
             System.out.println("查询的数据:"+page);
-            modelAndView.setViewName("WEB-INF/pages/userManagement/userList.jsp");
+            modelAndView.setViewName("pages/userManagement/userList");
         }
         return modelAndView;
 
@@ -87,7 +87,7 @@ public class ControllerUser {
         if(page != null){
 
             modelAndView.addObject("page",page);
-            modelAndView.setViewName("WEB-INF/pages/userManagement/userList.jsp");
+            modelAndView.setViewName("pages/userManagement/userList");
         }
        return modelAndView;
     }
@@ -111,7 +111,7 @@ public class ControllerUser {
         ModelAndView modelAndView = new ModelAndView();
         if(i>0){
             System.out.println("用户权限修改成功");
-            modelAndView.setViewName("WEB-INF/pages/userManagement/userList.jsp");
+            modelAndView.setViewName("pages/userManagement/userList");
         }
         return modelAndView;
     }
@@ -131,7 +131,7 @@ public class ControllerUser {
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("users",users);
-        modelAndView.setViewName("WEB-INF/pages/userManagement/userInput.jsp");
+        modelAndView.setViewName("pages/userManagement/userInput");
         return modelAndView;
     }
     @RequestMapping("/saveUsers.action")
@@ -144,7 +144,7 @@ public class ControllerUser {
         System.out.println("返回的数据："+i);
         if(i>0){
             modelAndView.addObject("update","更新成功");
-            modelAndView.setViewName("WEB-INF/pages/userManagement/userInput.jsp");
+            modelAndView.setViewName("pages/userManagement/userInput");
         }
         return modelAndView;
 
