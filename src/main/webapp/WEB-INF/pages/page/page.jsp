@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <ul class="pagination">
-			<c:if test="${age.curPage==1 }">
+			<c:if test="${page.curPage==1 }">
 				<li class="active"><a href="#">&laquo;</a></li>
 			</c:if>
 			<c:if test="${page.curPage!=1 }">
