@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hpe.ssa.mapper.BrandsMapper">
+	<sql id="Base_Column_List">
+		bid,bname,bsex,bstate,bremarks
+	</sql>
+	<select id="selectBrandsNum"  resultType="java.lang.Integer">
+		SELECT COUNT(bid)
+		FROM brands
+	</select>
+	<select id="selectBrands4List" parameterType="java.lang.Integer" resultType="com.hpe.ssa.pojo.Brands">
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM brands
+		ORDER BY bid
+		LIMIT #{index},10
+	</select>
+	<select id="selectBrandDetailById" parameterType="java.lang.Integer" resultType="com.hpe.ssa.pojo.Brands">
+		SELECT <include refid="Base_Column_List"/>
+		FROM brands WHERE bid=#{bid}
+	</select>
+	<select id="selectBrandNames" resultType="com.hpe.ssa.pojo.Brands">
+		SELECT bid,bname from brands
+	</select>
+	<insert id="insertSelective" parameterType="com.hpe.ssa.pojo.Brands" >
+		insert into brands
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="bid != null" >
+				bid,
+			</if>
+			<if test="bname != null" >
+				bname,
+			</if>
+			<if test="bsex != null" >
+				bsex,
+			</if>
+			<if test="bstate != null" >
+				bstate,
+			</if>
+			<if test="bremarks != null" >
+				bremarks,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="bid != null" >
+				#{bid,jdbcType=INTEGER},
+			</if>
+			<if test="bname != null" >
+				#{bname,jdbcType=VARCHAR},
+			</if>
+			<if test="bsex != null" >
+				#{bsex,jdbcType=VARCHAR},
+			</if>
+			<if test="bstate != null" >
+				#{bstate,jdbcType=INTEGER},
+			</if>
+			<if test="bremarks != null" >
+				#{bremarks,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateBrandState" parameterType="com.hpe.ssa.pojo.Brands">
+		UPDATE brands SET bstate=#{bstate} WHERE bid = #{bid}
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.hpe.ssa.pojo.Brands" >
+		update brands
+		<set >
+			<if test="bname != null" >
+				bname = #{bname,jdbcType=VARCHAR},
+			</if>
+			<if test="bsex != null" >
+				bsex = #{bsex,jdbcType=VARCHAR},
+			</if>
+			<if test="bremarks != null" >
+				bremarks = #{bremarks,jdbcType=VARCHAR},
+			</if>
+			<if test="bstate != null" >
+				bstate = #{bstate,jdbcType=INTEGER},
+			</if>
+		</set>
+		where bid = #{bid,jdbcType=INTEGER}
+	</update>
+</mapper>

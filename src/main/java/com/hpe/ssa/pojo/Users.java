@@ -2,6 +2,7 @@ package com.hpe.ssa.pojo;
 
 import java.util.Date;
 //用户实体类
+
 public class Users {
 	private int uid;
 	private String uaccount;

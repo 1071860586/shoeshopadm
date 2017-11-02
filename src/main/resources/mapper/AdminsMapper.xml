@@ -11,4 +11,49 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<include refid="Base_Column_List" />
 		from admins where acount=#{acount} and apwd=#{apwd}
 	</select>
+	<select id="getAdminsList" resultType="com.hpe.ssa.pojo.Admins">
+		select aid,acount from admins
+	</select>
+	<select id="selectAdminsNum" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+		SELECT count(aid)
+		FROM admins
+	</select>
+	<select id="selectAdminDetailById" parameterType="java.lang.Integer" resultMap="adminPermissionMap">
+		select aid,acount,apwd,pername,perid
+		from admins,permission
+		where admins.a_pcid=permission.perid and aid=#{aid}
+	</select>
+	<resultMap id="adminPermissionMap" type="com.hpe.ssa.pojo.Admins">
+		<id column="aid" property="aid"></id>
+		<result column="acount" property="acount"></result>
+		<result column="apwd" property="apwd"></result>
+		<association property="permission" javaType="com.hpe.ssa.pojo.Permission">
+			<id column="perid" property="perid"></id>
+			<result column="pername" property="pername"></result>
+		</association>
+	</resultMap>
+	<select id="selectAdminsList"  parameterType="java.lang.Integer" resultType="com.hpe.ssa.pojo.Admins">
+		select aid,acount
+		from admins
+		limit #{index},10
+	</select>
+	<select id="selectPermissionList" resultType="com.hpe.ssa.pojo.Permission">
+		select perid,pername
+		from permission
+	</select>
+	<insert id="insertAdmin" parameterType="com.hpe.ssa.pojo.Admins">
+		INSERT INTO admins
+		(acount,apwd,a_pcid,aremarks)
+		VALUES (#{acount},#{apwd},#{permission.perid},#{aremarks})
+	</insert>
+	<delete id="deleteAdmins" parameterType="java.lang.Integer">
+		delete from admins
+		where aid=#{aid}
+	</delete>
+	<update id="updateAdmins" parameterType="com.hpe.ssa.pojo.Admins">
+		update admins
+		set
+		acount=#{acount},apwd=#{apwd},a_pcid=#{a_pcid},aremarks=#{aremarks}
+		where aid=#{aid}
+	</update>
 </mapper>

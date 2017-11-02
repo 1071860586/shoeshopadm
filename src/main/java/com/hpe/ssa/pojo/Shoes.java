@@ -1,5 +1,6 @@
 package com.hpe.ssa.pojo;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -7,7 +8,9 @@ import java.util.List;
 public class Shoes {
     private Integer sid;
     private Integer stid;//类型
+    private String tname;//类型名
     private Integer sbid;//品牌
+    private String bname;//品牌名
     private String snum;//序列号
     private String sname;//名称
     private Float sprices;//价格
@@ -25,18 +28,20 @@ public class Shoes {
     private String sremarks;
     private String sandroidimg;
     private List<Sizes> sizeList;
-
+    private Integer[] sizeChoose;
 
     public Shoes() {
     }
 
-    public Shoes(Integer sid, Integer stid, Integer sbid, String snum, String sname, Float sprices,
-                 Integer sdiscount, Date spubtime, String sproducer, String sgender, String scolor, String sinfo,
-                 Integer stimesold, String simage, String sdetail, Float sintegral, Integer sdelete, String sremarks,
-                 String sandroidimg, List<Sizes> sizeList) {
+    public Shoes(Integer sid, Integer stid, String tname, Integer sbid, String bname, String snum, String sname,
+                 Float sprices, Integer sdiscount, Date spubtime, String sproducer, String sgender, String scolor,
+                 String sinfo, Integer stimesold, String simage, String sdetail, Float sintegral, Integer sdelete,
+                 String sremarks, String sandroidimg, List<Sizes> sizeList) {
         this.sid = sid;
         this.stid = stid;
+        this.tname = tname;
         this.sbid = sbid;
+        this.bname = bname;
         this.snum = snum;
         this.sname = sname;
         this.sprices = sprices;
@@ -70,6 +75,22 @@ public class Shoes {
 
     public void setStid(Integer stid) {
         this.stid = stid;
+    }
+
+    public String getTname() {
+        return tname;
+    }
+
+    public void setTname(String tname) {
+        this.tname = tname;
+    }
+
+    public String getBname() {
+        return bname;
+    }
+
+    public void setBname(String bname) {
+        this.bname = bname;
     }
 
     public Integer getSbid() {
@@ -216,12 +237,22 @@ public class Shoes {
         this.sizeList = sizeList;
     }
 
+    public Integer[] getSizeChoose() {
+        return sizeChoose;
+    }
+
+    public void setSizeChoose(Integer[] sizeChoose) {
+        this.sizeChoose = sizeChoose;
+    }
+
     @Override
     public String toString() {
         return "Shoes{" +
                 "sid=" + sid +
                 ", stid=" + stid +
+                ", tname='" + tname + '\'' +
                 ", sbid=" + sbid +
+                ", bname='" + bname + '\'' +
                 ", snum='" + snum + '\'' +
                 ", sname='" + sname + '\'' +
                 ", sprices=" + sprices +
@@ -239,6 +270,7 @@ public class Shoes {
                 ", sremarks='" + sremarks + '\'' +
                 ", sandroidimg='" + sandroidimg + '\'' +
                 ", sizeList=" + sizeList +
+                ", sizeChoose=" + Arrays.toString(sizeChoose) +
                 '}';
     }
 }

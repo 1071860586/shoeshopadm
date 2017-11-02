@@ -20,18 +20,18 @@
 
     <div class="main-content">
         <div class="row">
-            <form class="form-horizontal col-sm-offset-2" id="editshoeinfo" method="post">
+            <form class="form-horizontal col-sm-offset-2" id="editshoeinfo" method="post" >
                 <input type="text"  name="sid" hidden>
                 <div class="form-group">
-                    <label for="stid" class="col-sm-2 control-label">鞋子类型：</label>
+                    <label for="tname" class="col-sm-2 control-label">鞋子类型：</label>
                     <div class="col-sm-4">
-                        <select class="form-control" id="stid" name="stid">
+                        <select class="form-control" id="tname" name="tname">
 
                         </select>
                     </div>
-                    <label for="sbid" class="col-sm-2 control-label">鞋子品牌：</label>
+                    <label for="bname" class="col-sm-2 control-label">鞋子品牌：</label>
                     <div class="col-sm-4">
-                        <select class="form-control" id="sbid" name="sbid">
+                        <select class="form-control" id="bname" name="bname">
 
                         </select>
                     </div>
@@ -49,11 +49,11 @@
                     </div>
                     <label for="spubtime" class="col-sm-2 control-label">发布时间：</label>
                     <div class="col-sm-4">
-                        <input type="time" class="form-control" id="spubtime" name="spubtime" >
+                        <input type="date" class="form-control" id="spubtime" name="spubtime" >
                     </div>
                     <label for="sproducer" class="col-sm-2 control-label">生产商：</label>
                     <div class="col-sm-4">
-                        <input type="time" class="form-control" id="sproducer" name="sproducer" >
+                        <input type="text" class="form-control" id="sproducer" name="sproducer" >
                     </div>
                     <label for="sgender" class="col-sm-2 control-label">男女款式：</label>
                     <div class="col-sm-4">
@@ -93,6 +93,56 @@
                             <input type="radio" name="sdelete" value="1"> 禁用
                         </label>
                     </div>
+                    <label class="col-sm-2 control-label">选择尺寸：</label>
+                    <div class="col-sm-4">
+                        <label class="checkbox">
+                            <input type="checkbox" name="sizeChoose" value="1">35.0 num
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" name="sizeChoose" value="2">36.0 num
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" name="sizeChoose" value="3">37.0 num
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" name="sizeChoose" value="4">38.0 num
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" name="sizeChoose" value="5">39.0 num
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" name="sizeChoose" value="6">40.0 num
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" name="sizeChoose" value="7">41.0 num
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" name="sizeChoose" value="8">42.0 num
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" name="sizeChoose" value="9">43.0 num
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" name="sizeChoose" value="10">44.0 num
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" name="sizeChoose" value="11">45.0 num
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" name="sizeChoose" value="12">46.0 num
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" name="sizeChoose" value="13">47.0 num
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" name="sizeChoose" value="14">48.0 num
+                        </label>
+                        <%--<label for="simage" class="col-sm-2 control-label">继续上传图片：</label>--%>
+                        <%--<div class="col-sm-4">--%>
+                            <%--<input type="file" class="form-control" id="simage" name="simage" >--%>
+                        <%--</div>--%>
+                    </div>
+
                 </div>
                 <div class="form-group has-error">
                     <div class="col-sm-offset-2 col-sm-4 col-xs-6 ">
@@ -135,17 +185,35 @@
     </div>
 </div>
 <script>
-
-
+    $(function () {
+        setShoeDetail();
+    });
+    function getMyDate(str){
+        var oDate = new Date(str),
+            oYear = oDate.getFullYear(),
+            oMonth = oDate.getMonth()+1,
+            oDay = oDate.getDate(),
+            oTime = oYear +'-'+ getzf(oMonth) +'-'+ getzf(oDay);
+        return oTime;
+    }
+    //补0操作
+    function getzf(num){
+        if(parseInt(num) < 10){
+            num = '0'+num;
+        }
+        return num;
+    }
     function setShoeDetail() {
         var shoe = ${requestScope.shoe};
-        $("select[name='stid']").append("<option value=\'"+shoe.stid+"\' selected>"+shoe.stid+"</option>");
-        $("select[name='sbid']").append("<option value=\'"+shoe.sbid+"\' selected>"+shoe.sbid+"</option>");
+        $("input[name='sid']").val(shoe.sid);
+        $("select[name='tname']").append("<option value=\'"+shoe.stid+"\' selected>"+shoe.tname+"</option>");
+        $("select[name='bname']").append("<option value=\'"+shoe.sbid+"\' selected>"+shoe.bname+"</option>");
         $("input[name='snum']").val(shoe.snum);
         $("input[name='sname']").val(shoe.sname);
         $("input[name='sprices']").val(shoe.sprices);
         $("input[name='sproducer']").val(shoe.sproducer);
-        $("input[name='spubtime']").val(shoe.spubtime);
+        var time = getMyDate(shoe.spubtime);
+        $("input[name='spubtime']").val(time);
         $("input[name='scolor']").val(shoe.scolor);
         $("input[name='sinfo']").val(shoe.sinfo);
         $("input[name='stimesold']").val(shoe.stimesold);
@@ -155,6 +223,14 @@
         $("input[value="+shoe.sgender+"]").attr("checked",'checked');
         $("input[name='sdelete'][value='shoe.sdelete']").attr("checked",true);
         $("input[value="+shoe.sdelete+"]").attr("checked",'checked');
+        var sizeList = $("input[name='sizeChoose']");
+        $.each(shoe.sizeList,function (index, item) {
+            $.each(sizeList,function (inner_index,inner_item) {
+                if(item.sizeid==inner_item.value){
+                    inner_item.checked=true;
+                }
+            })
+        })
     }
 
     function editshoeinfo() {

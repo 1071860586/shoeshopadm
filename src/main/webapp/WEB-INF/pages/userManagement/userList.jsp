@@ -14,9 +14,7 @@
 	<jsp:include page="../common/common_left.jsp" flush="false"/>
 	<div class="content">
 		<div class="header">
-
 			<h1 class="page-title">用户列表</h1>
-
 		</div>
 		<div class="main-content">
 			<div class="row">
@@ -34,7 +32,7 @@
 			<table class="table">
 				<thead>
 					<tr>
-						<th>#</th>
+						<th>编号</th>
 						<th>用户账号</th>
 						<th>用户姓名</th>
 						<th>联系电话</th>
@@ -42,37 +40,46 @@
 						<th>积分</th>
 						<th>邮箱</th>
 						<th>注册时间</th>
-						<th ></th>
+						<th>处理</th>
 					</tr>
 				</thead>
 				<tbody>
-				<c:forEach items="${page.data }" var="users" varStatus="i">
-				
-				
-					<tr id="tr${users.uid }">
-						<td>${i.count }</td>
-						<td>${users.uaccount }</td>
-						<td>${users.uname }</td>
-						<td>${users.utel }</td>
-						<td>${users.ugender }</td>
-						<td>${users.uintegral }</td>
-						<td>${users.uemail }</td>
-						<td><fmt:formatDate value="${users.uregtime }" pattern="yyyy-MM-dd HH:mm:ss"/> </td>
-						<td><a href="editUsers.action?id=${users.uid} " title="修改"><i class="fa fa-pencil"></i></a> 
-						<c:if test="${users.udelete==0 }">
-							<a class="dela" id="del${users.uid }" href="javascript:void(0)" delid="${users.uid }" del="1">禁用</a>
-						</c:if>	
-						<c:if test="${users.udelete==1 }">
-							<a class="dela" id="del${users.uid }" href="javascript:void(0)" delid="${users.uid }" del="0">撤销禁用</a>
-						</c:if>	
+
+				<%--用循环语句--%>
+				<c:forEach items="${requestScope.page.data}" var="user" varStatus="status">
+					<tr>
+						<td><c:out value="${user.uid}"></c:out></td>
+						<td><c:out value="${user.uaccount}"></c:out></td>
+						<td><c:out value="${user.uname}"></c:out></td>
+						<td><c:out value="${user.utel}"></c:out></td>
+						<td><c:out value="${user.ugender}"></c:out></td>
+						<td><c:out value="${user.uintegral}"></c:out></td>
+						<td><c:out value="${user.uemail}"></c:out></td>
+						<%--JSTL格式化标签:
+						     属性介绍（格式化日期,formatDate）
+						     pattern:自定义格式模式
+						     value:要显示的日期
+						     type：DATE, TIME, 或 BOTH
+						     dateStyle:FULL, LONG, MEDIUM, SHORT, 或 DEFAULT
+						     timeStyle:FULL, LONG, MEDIUM, SHORT, 或 DEFAULT
+						--%>
+						<td><fmt:formatDate value="${user.uregtime}" type="both" dateStyle="medium" timeStyle="medium"></fmt:formatDate></td>
+						<td><a href="editUsers.action?id=${user.uid} " title="修改"><i class="fa fa-pencil"></i>修改</a>
+							<c:if test="${user.udelete==0}">
+								<a class="dela" id="del${user.uid }" href="javascript:void(0)" delid="${user.uid }" del="1">禁用</a>
+							</c:if>
+							<c:if test="${user.udelete==1 }">
+								<a class="dela" id="del${user.uid }" href="javascript:void(0)" delid="${user.uid }" del="0">撤销禁用</a>
+							</c:if>
 						</td>
 					</tr>
-				</c:forEach>	
+				</c:forEach>
 				</tbody>
 			</table>
+			<h5>共有${requestScope.page.rows}条记录，共${requestScope.page.totalPage}页</h5>
 			<jsp:include page="../page/page.jsp" flush="false"/>
-			
 
+<%--模态框--%>
 			<div class="modal small fade" id="myModal" tabindex="-1"
 				role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
@@ -97,10 +104,30 @@
 					</div>
 				</div>
 			</div>
-
 		</div>
+
 		<jsp:include page="../common/common_foot.jsp" flush="false"/>
 		<script type="text/javascript">
+			<%--展示分页信息--%>
+           /* $(document).ready(function() {
+                var curPage = 1;
+                getPage(1);
+
+            }
+            function getPage(curPage) {
+				alert(curPage);
+                $.ajax({
+                    type: "post",
+                    dataType: "json",
+                    url: "go.action",
+                    data: {"curPage": curPage},
+                    success: function (data) {
+
+                    }
+                });
+            }*/
+			
+			<%--展示模态框--%>
 			$(".dela").click(function(){
 				var delid = $(this).attr("delid");
 				var del = $(this).attr("del");
@@ -108,6 +135,7 @@
 				$("#del").val(del);
 				$("#myModal").modal("show");
 			});
+            <%--点击模态框的确定按钮时执行的操作--%>
 			$("#delBtn").click(function(){
 				var delid = $("#delid").val();
 				var del = $("#del").val();
