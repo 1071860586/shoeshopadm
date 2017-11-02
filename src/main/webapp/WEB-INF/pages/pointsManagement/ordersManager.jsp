@@ -24,15 +24,15 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 </head>
 <body class="theme-3">
-<jsp:include page="../common/common_head.jsp" flush="false"></jsp:include>
-<jsp:include page="../common/common_left.jsp" flush="false"></jsp:include>
+<jsp:include page="../common/common_head.jsp" flush="false"/>
+<jsp:include page="../common/common_left.jsp" flush="false"/>
 <div class="content">
     <div>
-        <form role="form" action="/getOrdersByNum">
+        <form role="form" action="getOrdersByNum">
                 <div class="input-group">
                     <input type="text" class="form-control" name="num" placeholder="Please enter number">
                     <span class="input-group-btn">
-						<<input type="submit"  class="btn btn-default" value="查询">
+						<input type="submit"  class="btn btn-default" value="查询">
 						</input>
 					</span>
                 </div>
@@ -108,12 +108,12 @@
             </tbody>
         </table>
         <div align="center">
-        <jsp:include page="../page/page.jsp" flush="false"></jsp:include>
+        <jsp:include page="../page/page1.jsp" flush="false"/>
         </div>
     </div>
 
 </div>
-<jsp:include page="../common/common_foot.jsp" flush="false"></jsp:include>
+<jsp:include page="../common/common_foot.jsp" flush="false"/>
 
 </body>
 </html>

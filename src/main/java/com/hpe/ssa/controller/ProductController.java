@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.ejb.Init;
+import javax.jws.WebParam;
 import java.util.Date;
 import java.util.List;
 
@@ -42,8 +43,10 @@ public class ProductController {
     }
 
     @RequestMapping("/shoemgmt")
-    public String showShoeMgmtPage(){
-        return "pages/productManagement/shoesList";
+    public ModelAndView showShoeMgmtPage(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("pages/productManagement/shoesList");
+        return mv;
     }
 
     @RequestMapping("/get/shoe/tnum")
@@ -55,8 +58,10 @@ public class ProductController {
 
 
     @RequestMapping("/shoeinput")
-    public String showShoeAddPage(){
-        return "pages/productManagement/shoesAdd";
+    public ModelAndView showShoeAddPage(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("pages/productManagement/shoesAdd");
+        return mv;
     }
 
     @RequestMapping(value = "/add/shoe",method = RequestMethod.POST)
